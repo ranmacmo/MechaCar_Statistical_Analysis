@@ -20,6 +20,8 @@ summary(model)
 
 Suspension_Coil <-read_csv("Resources/Suspension_Coil.csv")
 
+view(Suspension_Coil)
+
 Suspension_Summary <- Suspension_Coil |>summarize(PSI_mean = mean(PSI), 
                             PSI_median = median(PSI), 
                             PSI_variance = var(PSI), 
@@ -35,4 +37,13 @@ Suspension_Lot_Summary <- Suspension_Coil |>
                                     PSI_sd = sd(PSI))
 view(Suspension_Lot_Summary)
 
+# SUSPENSION COIL T-TEST 
+
+# Determine if coils psi results are stats different than pop mean 1500 
+t.test(Suspension_Coil$PSI, mu=1500 )
   
+# Determine if mfg lots are stats different that pop mean 1500 
+t.test(subset(Suspension_Coil,Manufacturing_Lot == "Lot1")$PSI, mu = 1500) 
+t.test(subset(Suspension_Coil,Manufacturing_Lot == "Lot2")$PSI, mu = 1500) 
+t.test(subset(Suspension_Coil,Manufacturing_Lot == "Lot3")$PSI, mu = 1500) 
+
